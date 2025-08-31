@@ -1,0 +1,40 @@
+{
+  "aoc": "80/03/2019",
+  "opspecs_date": "2025-04-27",
+  "fleet": {
+    "aircraft_model": "S-76 C++",
+    "registrations": [
+      "4X-BHS",
+      "4X-BEX",
+      "4X-BHT",
+      "4X-BOB"
+    ]
+  },
+  "types_of_operation": [
+    "Helicopter HEMS"
+  ],
+  "area": [
+    "EUROPE"
+  ],
+  "limitations": [
+    "VFR",
+    "CVFR"
+  ],
+  "specific_approvals": {
+    "NVG": {
+      "scope": "HEMS only",
+      "flight_rules": "VFR night only",
+      "preconditions": [
+        "OM",
+        "MCM"
+      ]
+    },
+    "RVSM": "N/A",
+    "EDTO": "N/A"
+  },
+  "other": [
+    "Shetach Hafala (IANR 79b) in Settled Area",
+    "Elevated Helipads - Land only"
+  ],
+  "continuing_airworthiness": "EYAL YOGEV (ANR OPS 248)"
+}

@@ -1,0 +1,26 @@
+# IFR Compliance Checker - Python Dependencies
+# This file lists all required Python packages for the BROOK Compliance Checker project
+
+# Core data processing and Excel export
+pandas>=1.5.0
+
+# Document processing - DOCX files
+python-docx>=0.8.11
+
+# Document processing - PDF files
+PyPDF2>=3.0.0
+
+# Note: The following are built-in Python modules and don't need installation:
+# - json
+# - re (regex)
+# - sys
+# - pathlib
+
+# Note: The following dependencies will be automatically installed:
+# - numpy (required by pandas)
+# - python-dateutil (required by pandas)
+# - pytz (required by pandas)
+# - tzdata (required by pandas)
+# - lxml (required by python-docx)
+# - typing_extensions (required by python-docx)
+# - six (required by python-dateutil)

@@ -1,0 +1,196 @@
+[
+  {
+    "id": "FLEET-S76-ALIGN",
+    "category": "Fleet",
+    "rule_type": "align_with_opspecs",
+    "item": "Manuals list only the OpsSpecs-approved fleet",
+    "entities": [
+      {
+        "type": "aircraft",
+        "icao": "S-76C++",
+        "synonyms": [
+          "S-76 C\\+\\+",
+          "S-76C\\+\\+",
+          "S[- ]?76"
+        ]
+      }
+    ],
+    "ops_facts": {
+      "aircraft_model": "S-76 C++",
+      "registrations": [
+        "4X-BHS",
+        "4X-BEX",
+        "4X-BHT",
+        "4X-BOB"
+      ]
+    },
+    "source_docs": [
+      "OM-A",
+      "OM-B",
+      "MEL",
+      "MCM",
+      "OpsSpecs"
+    ],
+    "anchor_sections": [
+      "Fleet",
+      "Company Aircraft",
+      "Aircraft Types"
+    ],
+    "scope": "section",
+    "positive_patterns": [
+      "(S[- ]?76C\\+\\+|S[- ]?76)\\b",
+      "4X-BHS|4X-BEX|4X-BHT|4X-BOB"
+    ],
+    "negative_patterns": [
+      "\\b(not\\s+(authorized|allowed|approved)|prohibit(?:ed)?)\\b.{0,60}(S[- ]?76|S[- ]?76C\\+\\+)"
+    ],
+    "forbidden_claims": [
+      "\\b(AW139|EC135|H145|Bell 4?12|[A-Z0-9]{2}-[A-Z0-9]{3})\\b"
+    ],
+    "threshold": 1,
+    "negation_window_tokens": 12,
+    "conflict_policy": "review_on_conflict",
+    "evidence_return": "sentence"
+  },
+  {
+    "id": "LIMITATIONS-VFR-CVFR-ONLY",
+    "category": "Limitations",
+    "rule_type": "limit",
+    "item": "Only VFR & CVFR operations are authorized (no IFR).",
+    "source_docs": [
+      "OM-A",
+      "OM-C",
+      "OpsSpecs"
+    ],
+    "anchor_sections": [
+      "Flight Rules",
+      "Operational Limitations",
+      "IFR/VFR/CVFR"
+    ],
+    "scope": "sentence",
+    "positive_patterns": [
+      "\\b(VFR|CVFR) (operations|only)\\b",
+      "Special limitations:\\s*VFR.*CVFR.*only"
+    ],
+    "negative_patterns": [
+      "\\bIFR\\b.{0,40}\\b(authorized|permitted|conducted)\\b",
+      "\\b(instrument flight rules)\\b.{0,40}\\b(authorized|permitted)\\b"
+    ],
+    "forbidden_claims": [
+      "\\bIFR\\b procedures",
+      "\\bIFR\\b training for ops"
+    ],
+    "negation_window_tokens": 12,
+    "threshold": 1,
+    "conflict_policy": "fail_on_conflict",
+    "evidence_return": "sentence"
+  },
+  {
+    "id": "NVG-HEMS-VFR-NIGHT",
+    "category": "Specific approvals",
+    "rule_type": "affirm",
+    "item": "NVG only on HEMS, only VFR night, subject to OM/MCM training & maintenance.",
+    "source_docs": [
+      "OM-A",
+      "OM-C",
+      "OM-D",
+      "MCM",
+      "OpsSpecs"
+    ],
+    "anchor_sections": [
+      "NVG",
+      "Night Operations",
+      "HEMS Operations",
+      "Training"
+    ],
+    "scope": "sentence",
+    "positive_patterns": [
+      "NVG (for|on) HEMS flights only",
+      "NVG use for VFR night (ops|operations) only",
+      "NVG.*(subject to|requires).*(training|operation(al)?|maintenance).*(OM|MCM)"
+    ],
+    "negative_patterns": [
+      "NVG.*(non-HEMS|general|all missions)",
+      "NVG.*\\bIFR\\b"
+    ],
+    "negation_window_tokens": 12,
+    "threshold": 2,
+    "conflict_policy": "review_on_conflict",
+    "evidence_return": "sentence"
+  },
+  {
+    "id": "AREA-EUROPE-ONLY",
+    "category": "Area",
+    "rule_type": "align_with_opspecs",
+    "item": "Manuals state operations within EUROPE; no extra regions implied.",
+    "source_docs": [
+      "OM-A",
+      "OM-C",
+      "OpsSpecs"
+    ],
+    "anchor_sections": [
+      "Area of Operation",
+      "Geographic Scope",
+      "Routes"
+    ],
+    "scope": "section",
+    "positive_patterns": [
+      "Area\\(s\\) of operation:?\\s*EUROPE",
+      "\\bEUROPE\\b"
+    ],
+    "forbidden_claims": [
+      "\\bASIA\\b|\\bAFRICA\\b|\\bNORTH AMERICA\\b|\\bMIDDLE EAST\\b|\\bOFFSHORE\\b"
+    ],
+    "threshold": 1,
+    "conflict_policy": "review_on_conflict",
+    "evidence_return": "sentence"
+  },
+  {
+    "id": "NOT-APPROVED-CLAIMS",
+    "category": "Specific approvals",
+    "rule_type": "deny",
+    "item": "Manuals must not imply approvals absent from OpsSpecs.",
+    "source_docs": [
+      "OM-A",
+      "OM-C",
+      "OpsSpecs"
+    ],
+    "anchor_sections": [
+      "Specific Approvals",
+      "Performance-based Navigation",
+      "Dangerous Goods"
+    ],
+    "scope": "sentence",
+    "forbidden_claims": [
+      "\\bRVSM\\b (approved|capable|operations)",
+      "\\bEDTO\\b (approved|capable|operations)",
+      "(CAT ?II|CAT ?III|Low visibility operations|LVO)",
+      "Dangerous goods (carriage|transport|acceptance)"
+    ],
+    "conflict_policy": "fail_on_conflict",
+    "evidence_return": "sentence"
+  },
+  {
+    "id": "OTHER-79B-ELEVATED-LAND",
+    "category": "Other",
+    "rule_type": "affirm",
+    "item": "Include IANR 79b in Settled Area and Elevated Helipads – Land only constraints.",
+    "source_docs": [
+      "OM-C",
+      "OpsSpecs"
+    ],
+    "anchor_sections": [
+      "Ad-hoc Landings",
+      "Helipad Operations",
+      "HEMS Mission Procedures"
+    ],
+    "scope": "sentence",
+    "positive_patterns": [
+      "Shetach Hafala.*\\b(IANR|79b)\\b.*Settled Area",
+      "Elevated Helipads?\\s*[-–]\\s*Land only"
+    ],
+    "threshold": 1,
+    "conflict_policy": "review_on_conflict",
+    "evidence_return": "sentence"
+  }
+]
