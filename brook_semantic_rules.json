@@ -1,57 +1,38 @@
 [
   {
-    "id": "FLEET-S76-ALIGN",
-    "category": "Fleet",
-    "rule_type": "align_with_opspecs",
-    "item": "Manuals list only the OpsSpecs-approved fleet",
-    "entities": [
-      {
-        "type": "aircraft",
-        "icao": "S-76C++",
-        "synonyms": [
-          "S-76 C\\+\\+",
-          "S-76C\\+\\+",
-          "S[- ]?76"
-        ]
-      }
-    ],
-    "ops_facts": {
-      "aircraft_model": "S-76 C++",
-      "registrations": [
-        "4X-BHS",
-        "4X-BEX",
-        "4X-BHT",
-        "4X-BOB"
-      ]
-    },
-    "source_docs": [
-      "OM-A",
-      "OM-B",
-      "MEL",
-      "MCM",
-      "OpsSpecs"
-    ],
-    "anchor_sections": [
-      "Fleet",
-      "Company Aircraft",
-      "Aircraft Types"
-    ],
-    "scope": "section",
-    "positive_patterns": [
-      "(S[- ]?76C\\+\\+|S[- ]?76)\\b",
-      "4X-BHS|4X-BEX|4X-BHT|4X-BOB"
-    ],
-    "negative_patterns": [
-      "\\b(not\\s+(authorized|allowed|approved)|prohibit(?:ed)?)\\b.{0,60}(S[- ]?76|S[- ]?76C\\+\\+)"
-    ],
-    "forbidden_claims": [
-      "\\b(AW139|EC135|H145|Bell 4?12|[A-Z0-9]{2}-[A-Z0-9]{3})\\b"
-    ],
-    "threshold": 1,
-    "negation_window_tokens": 12,
-    "conflict_policy": "review_on_conflict",
-    "evidence_return": "sentence"
+  "id": "FLEET-S76-ALIGN",
+  "category": "Fleet",
+  "rule_type": "align_with_opspecs",
+  "item": "Manuals list only the OpsSpecs-approved S-76 fleet; no extra registrations",
+  "entities": [
+    {
+      "type": "aircraft",
+      "icao": "S-76C++",
+      "synonyms": ["S-76 C\\+\\+", "S-76C\\+\\+", "S[- ]?76"]
+    }
+  ],
+  "ops_facts": {
+    "aircraft_model": "S-76 C++",
+    "registrations": ["4X-BHS", "4X-BEX", "4X-BHT", "4X-BOB"]
   },
+  "source_docs": ["OM-A", "OM-B", "MEL", "MCM", "OpsSpecs"],
+  "anchor_sections": ["Fleet", "Company Aircraft", "Aircraft Types"],
+  "scope": "section",
+  "positive_patterns": [
+    "(?i)S[- ]?76C\\+\\+|S[- ]?76\\b",
+    "(?i)\\bfleet\\b|\\baircraft\\b|\\bregistration(s)?\\b"
+  ],
+  "negative_patterns": [],
+  "forbidden_claims": [
+    "(?i)\\b4X-(?!BHS\\b|BEX\\b|BHT\\b|BOB\\b)[A-Z]{3}\\b",
+    "(?i)\\b(AW139|EC135|H145|Bell\\s?412)\\b"
+  ],
+  "threshold": 1,
+  "negation_window_tokens": 0,
+  "conflict_policy": "fail_on_conflict",
+  "evidence_return": "sentence"
+}
+,
   {
     "id": "LIMITATIONS-VFR-CVFR-ONLY",
     "category": "Limitations",
